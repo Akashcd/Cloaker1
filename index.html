@@ -1,0 +1,81 @@
+√<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age Range Tracking</title>
+
+  <!-- GA4 BASE TAG -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JHBSHLPXTM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-JHBSHLPXTM', {
+      send_page_view: true
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    .age-btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 20px 30px;
+      background: #2f9ee9;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+    .age-btn:hover {
+      background: #267fbb;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>What's Your Age Range?</h1>
+
+  <!-- AGE BUTTONS -->
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_18_24">18–24</a>
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_25_34">25–34</a>
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_35_44">35–44</a>
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_45_54">45–54</a>
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_55_69">55–69</a>
+  <a href="https://jtqfa.ttrk.io/click" class="age-btn" data-event="age_70_plus">70+</a>
+
+  <!-- CLICK TRACKING SCRIPT -->
+  <script>
+    document.querySelectorAll('.age-btn').forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        var eventName = this.getAttribute('data-event');
+        var redirectUrl = this.href;
+
+        gtag('event', eventName, {
+          transport_type: 'beacon',
+          event_callback: function() {
+            window.location.href = redirectUrl;
+          }
+        });
+
+        // fallback safety redirect
+        setTimeout(function() {
+          window.location.href = redirectUrl;
+        }, 500);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
